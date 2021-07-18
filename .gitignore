@@ -88,3 +88,8 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# dummy ssl file
+csr.pem
+key.pem
+server.crt

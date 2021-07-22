@@ -12,7 +12,7 @@ div
 import Vue from 'vue'
 import WebGLContent from '@/webgl/facemesh/'
 
-let webgl
+let webgl: WebGLContent | null = null
 
 export default Vue.extend({
   async mounted() {
@@ -22,6 +22,14 @@ export default Vue.extend({
     webgl = new WebGLContent(canvas)
     webgl.start()
     this.$video.start(video)
+
+    window.addEventListener('resize', this.resize)
+    window.addEventListener('deviceorientation', this.resize)
+  },
+  methods: {
+    resize() {
+      if (webgl !== null) webgl.resize()
+    },
   },
 })
 </script>

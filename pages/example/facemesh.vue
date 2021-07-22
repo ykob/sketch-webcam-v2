@@ -21,7 +21,7 @@ export default Vue.extend({
 
     webgl = new WebGLContent(canvas)
     webgl.start()
-    this.$video.start(video)
+    await this.$video.start(video)
 
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)

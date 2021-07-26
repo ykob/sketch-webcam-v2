@@ -1,5 +1,9 @@
 <template lang="pug">
 div
+  Setup(
+    v-if = '!isCameraLoaded'
+    @click = 'setupVideo'
+    )
   video(
     ref = 'video'
     )
@@ -15,13 +19,14 @@ import WebGLContent from '@/webgl/facemesh/'
 let webgl: WebGLContent | null = null
 
 export default Vue.extend({
-  async mounted() {
-    const video = this.$refs.video as HTMLVideoElement
+  data: () => ({
+    isCameraLoaded: false,
+  }),
+  mounted() {
     const canvas = this.$refs.canvas as HTMLCanvasElement
 
     webgl = new WebGLContent(canvas)
     webgl.start()
-    await this.$video.start(video)
 
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)
@@ -29,6 +34,18 @@ export default Vue.extend({
   methods: {
     resize() {
       if (webgl !== null) webgl.resize()
+    },
+    async setupVideo() {
+      const video = this.$refs.video as HTMLVideoElement
+
+      await this.$video
+        .start(video)
+        .then(() => {
+          this.isCameraLoaded = true
+        })
+        .catch(() => {
+          alert('カメラを有効にできませんでした。')
+        })
     },
   },
 })

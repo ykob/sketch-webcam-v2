@@ -7,27 +7,32 @@ class Video {
     this.elm = null
   }
 
-  async start(video: HTMLVideoElement) {
-    let srcObject = null
-    this.elm = video
+  async start(video: HTMLVideoElement): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      let srcObject = null
+      this.elm = video
 
-    await navigator.mediaDevices
-      .getUserMedia({
-        audio: false,
-        video: {
-          width: 1920,
-          facingMode: 'user'
-        }
-      })
-      .then(stream => {
-        srcObject = stream
-      })
-      .catch(() => {})
-    
-    this.elm.srcObject = srcObject
-    this.elm.setAttribute('playsinline', 'playsinline')
-    // this.elm.setAttribute('controls', 'controls')
-    this.elm.play()
+      await navigator.mediaDevices
+        .getUserMedia({
+          audio: false,
+          video: {
+            width: 1920,
+            facingMode: 'user'
+          }
+        })
+        .then(stream => {
+          srcObject = stream
+        })
+        .catch(() => {
+          reject()
+        })
+
+      this.elm.srcObject = srcObject
+      this.elm.setAttribute('playsinline', 'playsinline')
+      // this.elm.setAttribute('controls', 'controls')
+      this.elm.play()
+      resolve()
+    })
   }
 }
 

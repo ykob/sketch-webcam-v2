@@ -40,14 +40,14 @@ export default Vue.extend({
     },
   },
   computed: {
-    styles() {
+    styles(): { [key: string]: string } {
       return {
         width: this.width,
         height: this.height,
         borderRadius: this.radius,
       }
     },
-    classnames() {
+    classnames(): string[] {
       return [`${this.role}`]
     },
   },

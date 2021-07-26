@@ -1,0 +1,12 @@
+$z-map: (
+  video,
+  canvas,
+  console,
+);
+$break-point-sm: 600px;
+$break-point-md: 960px;
+
+:export {
+  breakPointSm: $break-point-sm;
+  breakPointMd: $break-point-md;
+}

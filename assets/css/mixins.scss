@@ -1,0 +1,15 @@
+@mixin l-sm {
+  @media all and (max-width: $break-point-sm - 1px) {
+    @content;
+  }
+}
+@mixin l-md {
+  @media all and (max-width: $break-point-md - 1px) and (min-width: $break-point-sm) {
+    @content;
+  }
+}
+@mixin l-lg {
+  @media all and (min-width: $break-point-md) {
+    @content;
+  }
+}

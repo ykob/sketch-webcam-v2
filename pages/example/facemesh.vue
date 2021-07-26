@@ -1,9 +1,17 @@
 <template lang="pug">
 div
+  Loading(
+    v-if = 'isInitialized === false'
+    )
+    |初期化しています
   Setup(
-    v-if = '!isCameraLoaded'
+    v-else-if = 'isLoadingCamera === false'
     @click = 'setupVideo'
     )
+  Loading(
+    v-else-if = 'isLoadedCamera === false'
+    )
+    |カメラを有効にしています
   video(
     ref = 'video'
     )
@@ -20,16 +28,21 @@ let webgl: WebGLContent | null = null
 
 export default Vue.extend({
   data: () => ({
-    isCameraLoaded: false,
+    isInitialized: false,
+    isLoadingCamera: false,
+    isLoadedCamera: false,
   }),
-  mounted() {
+  async mounted() {
     const canvas = this.$refs.canvas as HTMLCanvasElement
 
     webgl = new WebGLContent(canvas)
-    webgl.start()
+    await webgl.start()
 
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)
+
+    this.resize()
+    this.isInitialized = true
   },
   methods: {
     resize() {
@@ -38,10 +51,11 @@ export default Vue.extend({
     async setupVideo() {
       const video = this.$refs.video as HTMLVideoElement
 
+      this.isLoadingCamera = true
       await this.$video
         .start(video)
         .then(() => {
-          this.isCameraLoaded = true
+          this.isLoadedCamera = true
         })
         .catch(() => {
           alert('カメラを有効にできませんでした。')

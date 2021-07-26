@@ -6,6 +6,7 @@ svg(
   viewBox = '0 0 24 24'
   :aria-labelledby = 'iconName'
   role = 'presentation'
+  v-bind = '$attrs'
   )
   title(
     :id = 'iconName'

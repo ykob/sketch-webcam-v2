@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Camera from './Camera'
+import Video from './Video'
 
 export default class WebGLContent {
   canvas: HTMLCanvasElement
@@ -9,6 +10,7 @@ export default class WebGLContent {
   resolution = new THREE.Vector2()
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
+  video = new Video()
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -17,21 +19,29 @@ export default class WebGLContent {
       alpha: true,
       antialias: true,
     })
-    this.camera = new Camera(this.resolution.x, this.resolution.y)
+    this.renderer.setClearColor(0x000000, 1.0)
+    this.camera = new Camera(1, 1)
   }
 
   start(): void {
-    console.log(this.resolution)
+    this.clock.start()
+  }
+
+  update(): void {
+    this.video.update()
+    this.renderer.render(this.scene, this.camera)
   }
 
   resize(): void {
-    this.resolution.set(
-      window.innerWidth,
-      window.innerHeight
-    )
-    this.camera.resize(
-      this.resolution.x,
-      this.resolution.y
-    )
+    this.resolution.set(window.innerWidth, window.innerHeight)
+    this.camera.resize(this.resolution.x, this.resolution.y)
+    this.video.resize(this.resolution.x, this.resolution.y)
+    this.renderer.setSize(this.resolution.x, this.resolution.y)
+  }
+
+  setVideo(video: HTMLVideoElement): void {
+    const tVideo = new THREE.VideoTexture(video)
+    this.video.start(tVideo)
+    this.scene.add(this.video)
   }
 }

@@ -42,9 +42,16 @@ export default Vue.extend({
     window.addEventListener('deviceorientation', this.resize)
 
     this.resize()
+    this.update()
     this.isInitialized = true
   },
   methods: {
+    update() {
+      if (webgl !== null) webgl.update()
+      requestAnimationFrame(() => {
+        this.update()
+      })
+    },
     resize() {
       if (webgl !== null) webgl.resize()
     },
@@ -60,6 +67,8 @@ export default Vue.extend({
         .catch(() => {
           alert('カメラを有効にできませんでした。')
         })
+      
+      if (webgl !== null) webgl.setVideo(video)
     },
   },
 })

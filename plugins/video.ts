@@ -28,8 +28,8 @@ class Video {
         })
 
       this.elm.srcObject = srcObject
+      this.elm.setAttribute('autoplay', 'autoplay')
       this.elm.setAttribute('playsinline', 'playsinline')
-      // this.elm.setAttribute('controls', 'controls')
       this.elm.play()
       resolve()
     })

@@ -76,16 +76,18 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 video {
-  width: 100%;
+  width: 240px;
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 24px;
+  right: 24px;
+  z-index: z(video);
 }
 canvas {
   display: block;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: z(canvas);
 }
 </style>

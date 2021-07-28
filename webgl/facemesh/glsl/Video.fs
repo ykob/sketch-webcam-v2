@@ -1,14 +1,11 @@
-#version 300 es
 precision highp float;
 
 uniform sampler2D tVideo;
 
-in vec2 vUv;
-
-out vec4 fragColor;
+varying vec2 vUv;
 
 void main() {
-  vec4 videoColor = texture(tVideo, vUv);
+  vec4 videoColor = texture2D(tVideo, vUv);
 
-  fragColor = videoColor;
+  gl_FragColor = videoColor;
 }

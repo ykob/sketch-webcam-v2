@@ -82,7 +82,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 video {
-  width: 240px;
+  width: 25vw;
+  max-width: 240px;
   display: block;
   position: absolute;
   bottom: 24px;

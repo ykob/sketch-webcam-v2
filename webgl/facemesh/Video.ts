@@ -21,8 +21,9 @@ export default class Video extends THREE.Mesh {
     super(geometry, material)
   }
 
-  start(tVideo: THREE.VideoTexture) {
+  start(video: HTMLVideoElement) {
     const { uniforms } = this.material as THREE.RawShaderMaterial
+    const tVideo = new THREE.VideoTexture(video)
 
     uniforms.tVideo.value = tVideo
   }
@@ -35,7 +36,36 @@ export default class Video extends THREE.Mesh {
     }
   }
 
-  resize(width: number, height: number) {
+  resize(width: number, height: number, video: HTMLVideoElement) {
+    const screenAspect = width / height
+    const videoAspect = video.videoWidth / video.videoHeight
+    const { uniforms } = this.material as THREE.RawShaderMaterial
+
+    if (screenAspect > videoAspect) {
+      uniforms.uvTransform.value.set(
+        1,
+        0,
+        0,
+        0,
+        (videoAspect / screenAspect),
+        (1 - videoAspect / screenAspect) / 2,
+        0,
+        0,
+        1
+      )
+    } else {
+      uniforms.uvTransform.value.set(
+        (screenAspect / videoAspect),
+        0,
+        (1 - screenAspect / videoAspect) / 2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      )
+    }
     this.scale.set(width, height, 1)
   }
 }

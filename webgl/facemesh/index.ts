@@ -32,16 +32,16 @@ export default class WebGLContent {
     this.renderer.render(this.scene, this.camera)
   }
 
-  resize(): void {
+  resize(video: HTMLVideoElement): void {
     this.resolution.set(window.innerWidth, window.innerHeight)
     this.camera.resize(this.resolution.x, this.resolution.y)
-    this.video.resize(this.resolution.x, this.resolution.y)
+    this.video.resize(this.resolution.x, this.resolution.y, video)
     this.renderer.setSize(this.resolution.x, this.resolution.y)
   }
 
   setVideo(video: HTMLVideoElement): void {
-    const tVideo = new THREE.VideoTexture(video)
-    this.video.start(tVideo)
+    this.video.start(video)
+    this.video.resize(this.resolution.x, this.resolution.y, video)
     this.scene.add(this.video)
   }
 }

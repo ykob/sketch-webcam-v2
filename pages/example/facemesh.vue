@@ -35,11 +35,12 @@ export default Vue.extend({
   async mounted() {
     const canvas = this.$refs.canvas as HTMLCanvasElement
 
-    webgl = new WebGLContent(canvas)
-    await webgl.start()
-
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)
+
+    webgl = new WebGLContent(canvas)
+    await webgl.start()
+    await this.$utils.sleep(1000)
 
     this.resize()
     this.update()
@@ -53,7 +54,9 @@ export default Vue.extend({
       })
     },
     resize() {
-      if (webgl !== null) webgl.resize()
+      const video = this.$refs.video as HTMLVideoElement
+
+      if (webgl !== null) webgl.resize(video)
     },
     async setupVideo() {
       const video = this.$refs.video as HTMLVideoElement
@@ -61,14 +64,17 @@ export default Vue.extend({
       this.isLoadingCamera = true
       await this.$video
         .start(video)
-        .then(() => {
-          this.isLoadedCamera = true
-        })
         .catch(() => {
           alert('カメラを有効にできませんでした。')
         })
-      
-      if (webgl !== null) webgl.setVideo(video)
+
+      const intervalId = setInterval(() => {
+        if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+          if (webgl !== null) webgl.setVideo(video)
+          this.isLoadedCamera = true
+          clearInterval(intervalId)
+        }
+      }, 500)
     },
   },
 })

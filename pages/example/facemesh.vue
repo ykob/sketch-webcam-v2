@@ -23,11 +23,16 @@ div
 <script lang="ts">
 import Vue from 'vue'
 import WebGLContent from '@/webgl/facemesh/'
+import * as tf from '@tensorflow/tfjs';
+import * as fld from '@tensorflow-models/face-landmarks-detection';
 
 let webgl: WebGLContent | null = null
+let model: any = null
 
 export default Vue.extend({
   data: () => ({
+    timePrev: Date.now(),
+    timeNow: Date.now(),
     isInitialized: false,
     isLoadingCamera: false,
     isLoadedCamera: false,
@@ -42,12 +47,22 @@ export default Vue.extend({
     await webgl.start()
     await this.$utils.sleep(1000)
 
+    await tf.setBackend('webgl');
+    model = await fld.load(fld.SupportedPackages.mediapipeFacemesh)
+
     this.resize()
     this.update()
     this.isInitialized = true
   },
   methods: {
-    update() {
+    async update() {
+      this.timeNow = Date.now()
+      if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
+        const predictions = await model.estimateFaces({
+          input: this.$refs.video
+        })
+        this.timePrev = this.timeNow;
+      }
       if (webgl !== null) webgl.update()
       requestAnimationFrame(() => {
         this.update()

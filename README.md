@@ -1,6 +1,6 @@
 # sketch-webcam-v2
 
-Interactive demos with tensorflow.js, three.js and Nuxt.js.
+Interactive demos with Mediapipe Web, three.js and Nuxt.js.
 
 ## Build Setup
 
@@ -29,5 +29,6 @@ openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem ; openssl 
 
 ## references
 
+- [Getting Started / MediaPipe in JavaScript](https://google.github.io/mediapipe/getting_started/javascript.html)
 - [tensorflow/tfjs: A WebGL accelerated JavaScript library for training and deploying ML models.](https://github.com/tensorflow/tfjs)
 - [tensorflow/tfjs-models: Pretrained models for TensorFlow.js](https://github.com/tensorflow/tfjs-models)

@@ -28,7 +28,6 @@ export default class WebGLContent {
   }
 
   update(): void {
-    this.video.update()
     this.renderer.render(this.scene, this.camera)
   }
 

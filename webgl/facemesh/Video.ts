@@ -17,6 +17,7 @@ export default class Video extends THREE.Mesh {
       ]),
       vertexShader: vs,
       fragmentShader: fs,
+      depthTest: false,
     })
     super(geometry, material)
   }

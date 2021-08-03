@@ -57,6 +57,7 @@ export default Vue.extend({
   },
   methods: {
     async update() {
+      const video = this.$refs.video as HTMLVideoElement
       let predictions = []
       this.timeNow = Date.now()
       if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
@@ -65,7 +66,7 @@ export default Vue.extend({
         })
         this.timePrev = this.timeNow;
       }
-      if (webgl !== null) webgl.update(predictions)
+      if (webgl !== null) webgl.update(video, predictions)
       requestAnimationFrame(() => {
         this.update()
       })

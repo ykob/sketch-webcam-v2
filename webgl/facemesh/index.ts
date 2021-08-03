@@ -31,10 +31,10 @@ export default class WebGLContent {
     this.clock.start()
   }
 
-  update(predictions: any[]): void {
+  update(video: HTMLVideoElement, predictions: any[]): void {
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
-    this.face.update(time, predictions[0])
+    this.face.update(time, this.resolution, video, predictions[0])
     this.renderer.render(this.scene, this.camera)
   }
 

@@ -25,7 +25,6 @@ export default class Video extends THREE.Mesh {
   start(video: HTMLVideoElement) {
     const { uniforms } = this.material as THREE.RawShaderMaterial
     const tVideo = new THREE.VideoTexture(video)
-    tVideo.wrapS = THREE.RepeatWrapping
 
     uniforms.tVideo.value = tVideo
   }
@@ -39,7 +38,7 @@ export default class Video extends THREE.Mesh {
       uniforms.uvTransform.value.set(
         -1,
         0,
-        0,
+        1,
         0,
         (videoAspect / screenAspect),
         (1 - videoAspect / screenAspect) / 2,
@@ -51,7 +50,7 @@ export default class Video extends THREE.Mesh {
       uniforms.uvTransform.value.set(
         -(screenAspect / videoAspect),
         0,
-        (1 - screenAspect / videoAspect) / -2,
+        (1 - screenAspect / videoAspect) / 2 + (screenAspect / videoAspect),
         0,
         1,
         0,

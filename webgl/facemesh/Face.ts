@@ -16,19 +16,21 @@ export default class Face extends THREE.Mesh {
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
-      uniforms: {
-        time: {
-          value: 0
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.common,
+        {
+          time: {
+            value: 0
+          },
+          texture: {
+            value: null
+          }
         },
-        texture: {
-          value: null
-        }
-      },
+      ]),
       vertexShader: vs,
       fragmentShader: fs,
       side: THREE.BackSide,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
+      transparent: true
     })
 
     super(geometry, material)
@@ -56,16 +58,30 @@ export default class Face extends THREE.Mesh {
     this.geometry.attributes.position.needsUpdate = true;
   }
   setUv(arr: number[][]) {
+    const { uniforms } = this.material as THREE.RawShaderMaterial
     const uvs: number[] = arr.reduce((pre: number[], current: number[]) => {
       pre.push(...current)
       return pre
     }, [])
     const baUvs = new THREE.BufferAttribute(new Float32Array(uvs), 2)
-    this.geometry.setAttribute('uv', baUvs);
+    this.geometry.setAttribute('uv', baUvs)
+    uniforms.uvTransform.value.set(
+      -1,
+      0,
+      -1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      1
+    )
   }
   setTexture(texture: THREE.Texture) {
     const { uniforms } = this.material as THREE.RawShaderMaterial
 
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
     uniforms.texture.value = texture;
   }
 }

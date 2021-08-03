@@ -3,6 +3,8 @@ import Camera from './Camera'
 import Face from './Face'
 import Video from './Video'
 
+const texLoader = new THREE.TextureLoader()
+
 export default class WebGLContent {
   canvas: HTMLCanvasElement
   renderer: THREE.WebGLRenderer
@@ -25,7 +27,11 @@ export default class WebGLContent {
     this.camera = new Camera(1, 1)
   }
 
-  start(faceUVCoords: number[][]): void {
+  async start(faceUVCoords: number[][]): Promise<void> {
+    const response = await Promise.all([
+      texLoader.loadAsync(require('@/assets/img/example/facemesh/mask.jpg'))
+    ])
+    this.face.setTexture(response[0])
     this.face.setUv(faceUVCoords)
     this.scene.add(this.face)
     this.clock.start()

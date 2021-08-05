@@ -38,6 +38,10 @@ export default Vue.extend({
       type: String,
       default: '24px',
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     styles(): { [key: string]: string } {
@@ -48,7 +52,19 @@ export default Vue.extend({
       }
     },
     classnames(): string[] {
-      return [`${this.role}`]
+      return [
+        `${this.role}`,
+        ...Object
+          .entries({
+            'is-selected': this.selected,
+          })
+          .filter(o => {
+            return o[1] === true
+          })
+          .map(o => {
+            return o[0]
+          })
+      ]
     },
   },
 })
@@ -58,6 +74,7 @@ export default Vue.extend({
 .button {
   appearance: none;
   box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -81,12 +98,16 @@ export default Vue.extend({
   &.white {
     color: #222;
     background-color: #fff;
-    transition-property: background-color;
+    font-weight: 700;
+    transition-property: color, background-color;
+    &.is-selected {
+      background-color: #fb3;
+    }
     &:hover {
-      background-color: #aaa;
+      background-color: #fb3;
     }
     &:active {
-      background-color: #fe3;
+      background-color: #ff9;
     }
   }
 }

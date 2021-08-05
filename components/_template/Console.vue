@@ -4,6 +4,8 @@
     :title = 'title'
     )
   ButtonBackIndex.console__back-index
+  .console__buttons
+    slot
 </template>
 
 <script lang="ts">
@@ -50,6 +52,22 @@ export default Vue.extend({
     }
     @include l-sm {
       top: 24px;
+      right: 24px;
+    }
+  }
+  &__buttons {
+    position: absolute;
+    z-index: z(console);
+    @include l-lg {
+      bottom: 40px;
+      right: 40px;
+    }
+    @include l-md {
+      bottom: 32px;
+      right: 32px;
+    }
+    @include l-sm {
+      bottom: 24px;
       right: 24px;
     }
   }

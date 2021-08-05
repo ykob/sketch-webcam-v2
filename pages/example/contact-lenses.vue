@@ -18,6 +18,30 @@ div
   Console(
     title = 'contact lenses'
     )
+    ButtonConsole.mt-2(
+      value = '0'
+      :selected = 'selectedId === 0'
+      @click = 'changeTexture'
+      )
+      |0
+    ButtonConsole.mt-2(
+      value = '1'
+      :selected = 'selectedId === 1'
+      @click = 'changeTexture'
+      )
+      |1
+    ButtonConsole.mt-2(
+      value = '2'
+      :selected = 'selectedId === 2'
+      @click = 'changeTexture'
+      )
+      |2
+    ButtonConsole.mt-2(
+      value = '3'
+      :selected = 'selectedId === 3'
+      @click = 'changeTexture'
+      )
+      |3
   video(
     ref = 'video'
     )
@@ -43,6 +67,7 @@ export default Vue.extend({
     isInitialized: false,
     isLoadingCamera: false,
     isLoadedCamera: false,
+    selectedId: 1,
   }),
   async mounted() {
     const canvas = this.$refs.canvas as HTMLCanvasElement
@@ -54,7 +79,7 @@ export default Vue.extend({
     await tf.setBackend('webgl');
     model = await fld.load(fld.SupportedPackages.mediapipeFacemesh)
     webgl = new WebGLContent(canvas)
-    await webgl.start(model.constructor.getUVCoords())
+    await webgl.start()
     this.resize()
     this.update()
     this.isInitialized = true
@@ -89,7 +114,7 @@ export default Vue.extend({
       await this.$video
         .start(video)
         .catch(() => {
-          alert('カメラを有効にできませんでした。')
+          alert('The webcam could not be enabled.')
         })
 
       const intervalId = setInterval(() => {
@@ -99,6 +124,15 @@ export default Vue.extend({
           clearInterval(intervalId)
         }
       }, 500)
+    },
+    changeTexture(e: Event) {
+      if (e.target instanceof HTMLButtonElement) {
+        const { value } = e.target
+        if (webgl !== null) {
+          this.selectedId = parseInt(value)
+          webgl.changeTexture(parseInt(value))
+        }
+      }
     },
   },
 })

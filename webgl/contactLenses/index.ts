@@ -15,6 +15,7 @@ export default class WebGLContent {
   scene = new THREE.Scene()
   video = new Video()
   eyeIris = new EyeIris()
+  textures: THREE.Texture[] = []
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -27,11 +28,14 @@ export default class WebGLContent {
     this.camera = new Camera(1, 1)
   }
 
-  async start(faceUVCoords: number[][]): Promise<void> {
-    const response = await Promise.all([
-      texLoader.loadAsync(require('@/assets/img/example/contact-lenses/texture1.jpg'))
+  async start(): Promise<void> {
+    this.textures = await Promise.all([
+      texLoader.loadAsync(require('@/assets/img/example/contact-lenses/texture0.jpg')),
+      texLoader.loadAsync(require('@/assets/img/example/contact-lenses/texture1.jpg')),
+      texLoader.loadAsync(require('@/assets/img/example/contact-lenses/texture2.jpg')),
+      texLoader.loadAsync(require('@/assets/img/example/contact-lenses/texture3.jpg')),
     ])
-    this.eyeIris.setTexture(response[0])
+    this.eyeIris.setTexture(this.textures[1])
     this.scene.add(this.eyeIris)
     this.clock.start()
   }
@@ -54,5 +58,9 @@ export default class WebGLContent {
     this.video.start(video)
     this.video.resize(this.resolution.x, this.resolution.y, video)
     this.scene.add(this.video)
+  }
+
+  changeTexture(index: number) {
+    this.eyeIris.setTexture(this.textures[index])
   }
 }

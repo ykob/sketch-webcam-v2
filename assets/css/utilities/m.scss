@@ -1,0 +1,39 @@
+@for $i from 1 through 20 {
+  .mt {
+    &-#{$i} {
+      margin-top: $i * 4px;
+    }
+  }
+  .mb {
+    &-#{$i} {
+      margin-bottom: $i * 4px;
+    }
+  }
+  .mr {
+    &-#{$i} {
+      margin-right: $i * 4px;
+    }
+  }
+  .ml {
+    &-#{$i} {
+      margin-left: $i * 4px;
+    }
+  }
+  .mx {
+    &-#{$i} {
+      margin-right: $i * 4px;
+      margin-left: $i * 4px;
+    }
+  }
+  .my {
+    &-#{$i} {
+      margin-top: $i * 4px;
+      margin-bottom: $i * 4px;
+    }
+  }
+  .m {
+    &-#{$i} {
+      margin: $i * 4px;
+    }
+  }
+}

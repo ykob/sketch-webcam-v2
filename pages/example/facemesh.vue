@@ -89,7 +89,7 @@ export default Vue.extend({
       await this.$video
         .start(video)
         .catch(() => {
-          alert('カメラを有効にできませんでした。')
+          alert('The webcam could not be enabled.')
         })
 
       const intervalId = setInterval(() => {

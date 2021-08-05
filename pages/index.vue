@@ -3,9 +3,14 @@ div
   ul
     li
       a(
-        href = '/example/facemesh/'
+        href = '/example/facemesh'
         )
         |Facemesh
+    li
+      a(
+        href = '/example/contact-lenses'
+        )
+        |Contact Lenses
 </template>
 
 <script lang="ts">

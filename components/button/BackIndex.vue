@@ -41,7 +41,6 @@ export default Vue.extend({
       }
     },
     iconSize(): number {
-      console.log(this.breakPoint)
       switch (this.breakPoint) {
         case 'sm':
           return 24

@@ -1,9 +1,10 @@
 <template lang="pug">
 .loading
-  IconLoading(
-    size = '80'
-    )
-  div
+  .loading__icon
+    IconLoading(
+      size = '80'
+      )
+  .loading__text
     slot
 </template>
 
@@ -35,7 +36,9 @@ export default Vue.extend({})
   left: 0;
   z-index: z(setupVideo);
   color: #fff;
-  background-color: #222;
+  &__icon {
+    margin-bottom: 8px;
+  }
   svg {
     animation-name: rotate;
     animation-duration: 1s;

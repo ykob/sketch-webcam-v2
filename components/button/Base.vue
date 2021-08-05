@@ -79,7 +79,7 @@ export default Vue.extend({
     }
   }
   &.white {
-    color: currentColor;
+    color: #222;
     background-color: #fff;
     transition-property: background-color;
     &:hover {

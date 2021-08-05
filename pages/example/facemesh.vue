@@ -3,7 +3,7 @@ div
   Loading(
     v-if = 'isInitialized === false'
     )
-    |初期化しています
+    |Initializing...
   Setup(
     v-else-if = 'isLoadingCamera === false'
     @click = 'setupVideo'
@@ -11,7 +11,10 @@ div
   Loading(
     v-else-if = 'isLoadedCamera === false'
     )
-    |カメラを有効にしています
+    |in progress to enable the webcam...
+  SetupBack(
+    v-if = 'isLoadedCamera === false'
+    )
   Console(
     title = 'facemesh'
     )

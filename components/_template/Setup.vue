@@ -1,8 +1,8 @@
 <template lang="pug">
 .setup
-  div
-    |カメラを有効にしてください
-  ButtonSetupVideo.btn(
+  .setup__text
+    |Let enable the webcam.
+  ButtonSetupVideo(
     @click = '$emit("click", $event)'
     )
 </template>
@@ -26,6 +26,8 @@ export default Vue.extend({})
   left: 0;
   z-index: z(setupVideo);
   color: #fff;
-  background-color: #222;
+  &__text {
+    margin-bottom: 16px;
+  }
 }
 </style>

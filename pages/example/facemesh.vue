@@ -12,7 +12,10 @@ div
     v-else-if = 'isLoadedCamera === false'
     )
     |カメラを有効にしています
-  video(
+  ExampleOutline(
+    title = 'facemesh'
+    )
+  video.video-(
     ref = 'video'
     )
   canvas(
@@ -49,7 +52,7 @@ export default Vue.extend({
     model = await fld.load(fld.SupportedPackages.mediapipeFacemesh)
 
     webgl = new WebGLContent(canvas)
-    await webgl.start(model.constructor.getUVCoords())
+    webgl.start()
 
     this.resize()
     this.update()
@@ -98,21 +101,4 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
-video {
-  width: 25vw;
-  max-width: 240px;
-  display: block;
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: z(video);
-}
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: z(canvas);
-}
-</style>
+<style lang="scss" scoped></style>

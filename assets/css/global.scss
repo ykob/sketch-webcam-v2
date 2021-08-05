@@ -4,4 +4,32 @@ html {
 body {
   min-height: 100%;
   overflow: hidden;
+  letter-spacing: 0.14em;
+}
+video {
+  display: block;
+  position: absolute;
+  z-index: z(video);
+  @include l-lg {
+    width: 240px;
+    bottom: 40px;
+    left: 40px;
+  }
+  @include l-md {
+    width: 140px;
+    bottom: 32px;
+    left: 32px;
+  }
+  @include l-sm {
+    width: 140px;
+    bottom: 24px;
+    left: 24px;
+  }
+}
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: z(canvas);
 }

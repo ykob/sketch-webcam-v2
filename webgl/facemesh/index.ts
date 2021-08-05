@@ -34,7 +34,6 @@ export default class WebGLContent {
   }
 
   update(video: HTMLVideoElement, predictions: any[]): void {
-    console.log(predictions)
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
     this.faceWireFrame.update(time, this.resolution, video, predictions[0])

@@ -27,8 +27,14 @@ export default class EyeIrisPoints extends THREE.Points {
     super(geometry, material)
   }
   update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
-    if (!video || !prediction) return
+    if (!video || !prediction) {
+      this.visible = false
+      return
+    } else {
+      this.visible = true
+    }
 
+    const { attributes } = this.geometry
     const { uniforms } = this.material as THREE.RawShaderMaterial
     const { leftEyeIris, rightEyeIris } = prediction.annotations
     const screenAspect = resolution.x / resolution.y
@@ -38,7 +44,7 @@ export default class EyeIrisPoints extends THREE.Points {
       ...rightEyeIris,
     ]
 
-    uniforms.time.value += time;
+    uniforms.time.value += time
     for (var i = 0, ul = positions.length; i < ul; i++) {
       let x = -positions[i][0] / video.videoWidth * resolution.x + resolution.x / 2
       let y = -positions[i][1] / video.videoHeight * resolution.y + resolution.y / 2
@@ -48,8 +54,8 @@ export default class EyeIrisPoints extends THREE.Points {
       } else {
         x = x * videoAspect / screenAspect
       }
-      this.geometry.attributes.position.setXYZ(i, x, y, z);
+      attributes.position.setXYZ(i, x, y, z)
     }
-    this.geometry.attributes.position.needsUpdate = true;
+    attributes.position.needsUpdate = true
   }
 }

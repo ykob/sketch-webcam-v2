@@ -34,6 +34,7 @@ import * as fld from '@tensorflow-models/face-landmarks-detection'
 
 let webgl: WebGLContent | null = null
 let model: any = null
+let predictions: any[] = []
 
 export default Vue.extend({
   data: () => ({
@@ -61,7 +62,7 @@ export default Vue.extend({
   methods: {
     async update() {
       const video = this.$refs.video as HTMLVideoElement
-      let predictions = []
+
       this.timeNow = Date.now()
       if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
         predictions = await model.estimateFaces({

@@ -12,10 +12,10 @@ div
     v-else-if = 'isLoadedCamera === false'
     )
     |カメラを有効にしています
-  ExampleOutline(
+  Console(
     title = 'facemesh'
     )
-  video.video-(
+  video(
     ref = 'video'
     )
   canvas(
@@ -41,19 +41,16 @@ export default Vue.extend({
     isLoadedCamera: false,
   }),
   async mounted() {
-    await this.$utils.sleep(1000)
-
     const canvas = this.$refs.canvas as HTMLCanvasElement
 
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)
 
+    await this.$utils.sleep(1000)
     await tf.setBackend('webgl');
     model = await fld.load(fld.SupportedPackages.mediapipeFacemesh)
-
     webgl = new WebGLContent(canvas)
     webgl.start()
-
     this.resize()
     this.update()
     this.isInitialized = true
@@ -75,9 +72,11 @@ export default Vue.extend({
       })
     },
     resize() {
+      const { state, commit } = this.$store
       const video = this.$refs.video as HTMLVideoElement
 
-      if (webgl !== null) webgl.resize(video)
+      commit('resize')
+      if (webgl !== null) webgl.resize(state.resolution.x, state.resolution.y, video)
     },
     async setupVideo() {
       const video = this.$refs.video as HTMLVideoElement

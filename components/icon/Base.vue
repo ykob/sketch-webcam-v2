@@ -42,6 +42,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 svg {
+  display: block;
   flex-shrink: 0;
 }
 </style>

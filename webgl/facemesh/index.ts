@@ -41,8 +41,8 @@ export default class WebGLContent {
     this.renderer.render(this.scene, this.camera)
   }
 
-  resize(video: HTMLVideoElement): void {
-    this.resolution.set(window.innerWidth, window.innerHeight)
+  resize(width: number, height: number, video: HTMLVideoElement): void {
+    this.resolution.set(width, height)
     this.camera.resize(this.resolution.x, this.resolution.y)
     this.video.resize(this.resolution.x, this.resolution.y, video)
     this.renderer.setSize(this.resolution.x, this.resolution.y)

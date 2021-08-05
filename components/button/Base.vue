@@ -78,5 +78,16 @@ export default Vue.extend({
       background-color: rgba(#fff, 0.4);
     }
   }
+  &.white {
+    color: currentColor;
+    background-color: #fff;
+    transition-property: background-color;
+    &:hover {
+      background-color: #aaa;
+    }
+    &:active {
+      background-color: #fe3;
+    }
+  }
 }
 </style>

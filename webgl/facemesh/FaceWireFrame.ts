@@ -2,10 +2,10 @@ import * as THREE from 'three'
 
 import { TRIANGULATION } from '@/const/triangulation';
 
-import vs from './glsl/Face.vs'
-import fs from './glsl/Face.fs'
+import vs from './glsl/FaceWireFrame.vs'
+import fs from './glsl/FaceWireFrame.fs'
 
-export default class Face extends THREE.Mesh {
+export default class FaceWireFrame extends THREE.Mesh {
   constructor() {
     // Define Geometry
     const geometry = new THREE.BufferGeometry()
@@ -22,28 +22,24 @@ export default class Face extends THREE.Mesh {
           time: {
             value: 0
           },
-          texture: {
-            value: null
-          }
         },
       ]),
       vertexShader: vs,
       fragmentShader: fs,
-      side: THREE.BackSide,
-      transparent: true
+      wireframe: true,
     })
 
     super(geometry, material)
   }
   update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
     if (!video || !prediction) return
+
     const { uniforms } = this.material as THREE.RawShaderMaterial
     const { scaledMesh } = prediction
     const screenAspect = resolution.x / resolution.y
     const videoAspect = video.videoWidth / video.videoHeight
 
     uniforms.time.value += time;
-
     for (var i = 0, ul = scaledMesh.length; i < ul; i++) {
       let x = -scaledMesh[i][0] / video.videoWidth * resolution.x + resolution.x / 2
       let y = -scaledMesh[i][1] / video.videoHeight * resolution.y + resolution.y / 2
@@ -56,32 +52,5 @@ export default class Face extends THREE.Mesh {
       this.geometry.attributes.position.setXYZ(i, x, y, z);
     }
     this.geometry.attributes.position.needsUpdate = true;
-  }
-  setUv(arr: number[][]) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
-    const uvs: number[] = arr.reduce((pre: number[], current: number[]) => {
-      pre.push(...current)
-      return pre
-    }, [])
-    const baUvs = new THREE.BufferAttribute(new Float32Array(uvs), 2)
-    this.geometry.setAttribute('uv', baUvs)
-    uniforms.uvTransform.value.set(
-      -1,
-      0,
-      -1,
-      0,
-      -1,
-      -1,
-      0,
-      0,
-      1
-    )
-  }
-  setTexture(texture: THREE.Texture) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
-
-    texture.wrapS = THREE.RepeatWrapping
-    texture.wrapT = THREE.RepeatWrapping
-    uniforms.texture.value = texture;
   }
 }

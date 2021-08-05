@@ -1,9 +1,8 @@
 import * as THREE from 'three'
 import Camera from './Camera'
-import Face from './Face'
+import FaceWireFrame from './FaceWireFrame'
+import EyeIrisPoints from './EyeIrisPoints'
 import Video from './Video'
-
-const texLoader = new THREE.TextureLoader()
 
 export default class WebGLContent {
   canvas: HTMLCanvasElement
@@ -14,7 +13,8 @@ export default class WebGLContent {
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
   video = new Video()
-  face = new Face()
+  faceWireFrame = new FaceWireFrame()
+  eyeIrisPoints = new EyeIrisPoints()
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -27,20 +27,18 @@ export default class WebGLContent {
     this.camera = new Camera(1, 1)
   }
 
-  async start(faceUVCoords: number[][]): Promise<void> {
-    const response = await Promise.all([
-      texLoader.loadAsync(require('@/assets/img/example/facemesh/mask.jpg'))
-    ])
-    this.face.setTexture(response[0])
-    this.face.setUv(faceUVCoords)
-    this.scene.add(this.face)
+  start(): void {
+    this.scene.add(this.faceWireFrame)
+    this.scene.add(this.eyeIrisPoints)
     this.clock.start()
   }
 
   update(video: HTMLVideoElement, predictions: any[]): void {
+    console.log(predictions)
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
-    this.face.update(time, this.resolution, video, predictions[0])
+    this.faceWireFrame.update(time, this.resolution, video, predictions[0])
+    this.eyeIrisPoints.update(time, this.resolution, video, predictions[0])
     this.renderer.render(this.scene, this.camera)
   }
 

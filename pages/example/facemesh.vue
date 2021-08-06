@@ -11,7 +11,7 @@ div
   Loading(
     v-else-if = 'isLoadedCamera === false'
     )
-    |in progress to enable the webcam...
+    |In progress to enable the webcam...
   SetupBack(
     v-if = 'isLoadedCamera === false'
     )

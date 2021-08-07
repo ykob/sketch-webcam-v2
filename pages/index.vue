@@ -11,6 +11,11 @@ div
         href = '/example/contact-lenses'
         )
         |Contact Lenses
+    li
+      a(
+        href = '/example/makeup'
+        )
+        |Makeup
 </template>
 
 <script lang="ts">

@@ -1,6 +1,6 @@
 $spacer: 4px;
 $spacers: ();
-@for $i from 0 through 16 {
+@for $i from 1 through 16 {
   $spacers: map-merge($spacers, ($i: $spacer * $i))
 }
 
@@ -43,20 +43,24 @@ $utilities: (
 );
 
 @each $key1, $props in $utilities {
-  @each $key2, $value in map-get($props, values) {
-    $class: map-get($props, class);
-    $modifier: '-' + $key2;
-    $property: map-get($props, property);
+  $values: map-get($props, values);
 
-    @if type-of($property) == 'list' {
-      .#{$class + $modifier} {
-        @each $property2 in $property {
-          #{$property2}: #{$value};
+  @if type-of($values) == 'map' {
+    @each $modifier, $value in $values {
+      $class: map-get($props, class);
+      $property: map-get($props, property);
+
+      @if type-of($property) == 'list' {
+        .#{$class + '-' + $modifier} {
+          @each $property2 in $property {
+            #{$property2}: #{$value};
+          }
         }
       }
-    } @else {
-      .#{$class + $modifier} {
-        #{$property}: #{$value};
+      @else {
+        .#{$class + '-' + $modifier} {
+          #{$property}: #{$value};
+        }
       }
     }
   }

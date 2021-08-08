@@ -8,29 +8,56 @@ $utilities: (
   'margin-top': (
     class: 'mt',
     property: margin-top,
-    value: $spacers
+    values: $spacers
   ),
   'margin-bottom': (
     class: 'mb',
     property: margin-bottom,
-    value: $spacers
+    values: $spacers
   ),
   'margin-right': (
     class: 'mr',
     property: margin-right,
-    value: $spacers
+    values: $spacers
   ),
   'margin-left': (
     class: 'ml',
     property: margin-left,
-    value: $spacers
+    values: $spacers
+  ),
+  'margin-x': (
+    class: 'mx',
+    property: margin-right margin-left,
+    values: $spacers
+  ),
+  'margin-y': (
+    class: 'my',
+    property: margin-top margin-bottom,
+    values: $spacers
+  ),
+  'margin': (
+    class: 'm',
+    property: margin,
+    values: $spacers
   ),
 );
 
 @each $key1, $props in $utilities {
-  @each $key2, $value in map-get($props, value) {
-    .#{map-get($props, class)}-#{$key2} {
-      #{map-get($props, property)}: #{$value};
+  @each $key2, $value in map-get($props, values) {
+    $class: map-get($props, class);
+    $modifier: '-' + $key2;
+    $property: map-get($props, property);
+
+    @if type-of($property) == 'list' {
+      .#{$class + $modifier} {
+        @each $property2 in $property {
+          #{$property2}: #{$value};
+        }
+      }
+    } @else {
+      .#{$class + $modifier} {
+        #{$property}: #{$value};
+      }
     }
   }
 }

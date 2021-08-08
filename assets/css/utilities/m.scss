@@ -1,39 +1,36 @@
-@for $i from 1 through 20 {
-  .mt {
-    &-#{$i} {
-      margin-top: $i * 4px;
-    }
-  }
-  .mb {
-    &-#{$i} {
-      margin-bottom: $i * 4px;
-    }
-  }
-  .mr {
-    &-#{$i} {
-      margin-right: $i * 4px;
-    }
-  }
-  .ml {
-    &-#{$i} {
-      margin-left: $i * 4px;
-    }
-  }
-  .mx {
-    &-#{$i} {
-      margin-right: $i * 4px;
-      margin-left: $i * 4px;
-    }
-  }
-  .my {
-    &-#{$i} {
-      margin-top: $i * 4px;
-      margin-bottom: $i * 4px;
-    }
-  }
-  .m {
-    &-#{$i} {
-      margin: $i * 4px;
+$spacer: 4px;
+$spacers: ();
+@for $i from 0 through 16 {
+  $spacers: map-merge($spacers, ($i: $spacer * $i))
+}
+
+$utilities: (
+  'margin-top': (
+    class: 'mt',
+    property: margin-top,
+    value: $spacers
+  ),
+  'margin-bottom': (
+    class: 'mb',
+    property: margin-bottom,
+    value: $spacers
+  ),
+  'margin-right': (
+    class: 'mr',
+    property: margin-right,
+    value: $spacers
+  ),
+  'margin-left': (
+    class: 'ml',
+    property: margin-left,
+    value: $spacers
+  ),
+);
+
+@each $key1, $props in $utilities {
+  @each $key2, $value in map-get($props, value) {
+    .#{map-get($props, class)}-#{$key2} {
+      #{map-get($props, property)}: #{$value};
     }
   }
 }

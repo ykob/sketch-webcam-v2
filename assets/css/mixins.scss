@@ -17,7 +17,7 @@ $break-point-lg: map-get($breakpoints, lg);
   }
 }
 
-@mixin generate-utility($utilities) {
+@mixin generate-utility($utilities, $infix) {
   @each $key, $props in $utilities {
     $values: map-get($props, values);
   
@@ -26,7 +26,7 @@ $break-point-lg: map-get($breakpoints, lg);
         $class: map-get($props, class);
         $property: map-get($props, property);
   
-        .#{$class + '-' + $modifier} {
+        .#{$class + $infix + '-' + $modifier} {
           @if type-of($property) == 'list' {
             @each $item in $property {
               #{$item}: #{$value};

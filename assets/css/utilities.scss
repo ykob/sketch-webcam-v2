@@ -1,1 +1,11 @@
-@include generate-utility($utilities);
+@include generate-utility($utilities, '');
+
+@include l-lg {
+  @include generate-utility($utilities, '-lg');
+}
+@include l-md {
+  @include generate-utility($utilities, '-md');
+}
+@include l-sm {
+  @include generate-utility($utilities, '-sm');
+}

@@ -61,7 +61,7 @@ export default class EyeIris extends THREE.Points {
       } else {
         x = x * videoAspect / screenAspect
       }
-      const size = Math.abs(positions[i][1][0] - positions[i][2][0]) * 1.4
+      const size = Math.abs(positions[i][1][0] - positions[i][2][0]) * 1
       attributes.position.setXYZ(i, x, y, z)
       attributes.pointSize.setX(i, size)
     }

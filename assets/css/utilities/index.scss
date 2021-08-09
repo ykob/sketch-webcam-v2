@@ -1,1 +1,4 @@
-@import 'm.scss';
+@import './variables.scss';
+@import './mixins.scss';
+
+@include generate-utility($utilities);

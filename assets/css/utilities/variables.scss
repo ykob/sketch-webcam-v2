@@ -41,27 +41,3 @@ $utilities: (
     values: $spacers
   ),
 );
-
-@each $key1, $props in $utilities {
-  $values: map-get($props, values);
-
-  @if type-of($values) == 'map' {
-    @each $modifier, $value in $values {
-      $class: map-get($props, class);
-      $property: map-get($props, property);
-
-      @if type-of($property) == 'list' {
-        .#{$class + '-' + $modifier} {
-          @each $property2 in $property {
-            #{$property2}: #{$value};
-          }
-        }
-      }
-      @else {
-        .#{$class + '-' + $modifier} {
-          #{$property}: #{$value};
-        }
-      }
-    }
-  }
-}

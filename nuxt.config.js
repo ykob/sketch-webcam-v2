@@ -34,7 +34,7 @@ export default {
   css: [
     'normalize.css',
     '@/assets/css/global.scss',
-    '@/assets/css/utilities/',
+    '@/assets/css/utilities.scss',
   ],
 
   styleResources: {

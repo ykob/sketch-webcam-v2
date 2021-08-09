@@ -1,5 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { breakPointSm, breakPointMd } from '@/assets/css/variables.scss'
+import { breakPointMd, breakPointLg } from '@/assets/css/variables.scss'
 
 export const state = () => ({
   resolution: {
@@ -13,12 +13,12 @@ export type RootState = ReturnType<typeof state>
 export const getters: GetterTree<RootState, RootState> = {
   breakpoint: (state): string => {
     const breakpoints = {
-      sm: parseInt(breakPointSm.replace('px', '')),
       md: parseInt(breakPointMd.replace('px', '')),
+      lg: parseInt(breakPointLg.replace('px', '')),
     }
-    if (state.resolution.x <= breakpoints.sm) {
+    if (state.resolution.x <= breakpoints.md) {
       return 'sm'
-    } else if (state.resolution.x <= breakpoints.md) {
+    } else if (state.resolution.x <= breakpoints.lg) {
       return 'md'
     } else {
       return 'lg'

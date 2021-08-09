@@ -1,15 +1,42 @@
+$break-point-md: map-get($breakpoints, md);
+$break-point-lg: map-get($breakpoints, lg);
+
 @mixin l-sm {
-  @media all and (max-width: $break-point-sm - 1px) {
+  @media all and (max-width: $break-point-md - 1px) {
     @content;
   }
 }
 @mixin l-md {
-  @media all and (max-width: $break-point-md - 1px) and (min-width: $break-point-sm) {
+  @media all and (max-width: $break-point-lg - 1px) and (min-width: $break-point-md) {
     @content;
   }
 }
 @mixin l-lg {
-  @media all and (min-width: $break-point-md) {
+  @media all and (min-width: $break-point-lg) {
     @content;
+  }
+}
+
+@mixin generate-utility($utilities) {
+  @each $key, $props in $utilities {
+    $values: map-get($props, values);
+  
+    @if type-of($values) == 'map' {
+      @each $modifier, $value in $values {
+        $class: map-get($props, class);
+        $property: map-get($props, property);
+  
+        .#{$class + '-' + $modifier} {
+          @if type-of($property) == 'list' {
+            @each $item in $property {
+              #{$item}: #{$value};
+            }
+          }
+          @else {
+            #{$property}: #{$value};
+          }
+        }
+      }
+    }
   }
 }

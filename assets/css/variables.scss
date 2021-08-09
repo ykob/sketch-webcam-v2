@@ -5,10 +5,57 @@ $z-map: (
   setupVideo,
   console,
 );
-$break-point-sm: 600px;
-$break-point-md: 960px;
+$breakpoints: (
+  sm: 0,
+  md: 600px,
+  lg: 960px
+);
+
+$spacer: 4px;
+$spacers: ();
+@for $i from 1 through 16 {
+  $spacers: map-merge($spacers, ($i: $spacer * $i))
+}
+
+$utilities: (
+  'margin-top': (
+    class: 'mt',
+    property: margin-top,
+    values: $spacers
+  ),
+  'margin-bottom': (
+    class: 'mb',
+    property: margin-bottom,
+    values: $spacers
+  ),
+  'margin-right': (
+    class: 'mr',
+    property: margin-right,
+    values: $spacers
+  ),
+  'margin-left': (
+    class: 'ml',
+    property: margin-left,
+    values: $spacers
+  ),
+  'margin-x': (
+    class: 'mx',
+    property: margin-right margin-left,
+    values: $spacers
+  ),
+  'margin-y': (
+    class: 'my',
+    property: margin-top margin-bottom,
+    values: $spacers
+  ),
+  'margin': (
+    class: 'm',
+    property: margin,
+    values: $spacers
+  ),
+);
 
 :export {
-  breakPointSm: $break-point-sm;
-  breakPointMd: $break-point-md;
+  breakPointMd: map-get($breakpoints, md);
+  breakPointLg: map-get($breakpoints, lg);
 }

@@ -137,6 +137,16 @@ $utilities: (
     property: margin,
     values: $spacers
   ),
+  'overflow': (
+    class: 'ov',
+    property: overflow,
+    values: (
+      v: visible,
+      h: hidden,
+      s: scroll,
+      a: auto
+    )
+  ),
   'text-align': (
     class: 'ta',
     property: text-align,
@@ -147,6 +157,27 @@ $utilities: (
       j: justify
     )
   ),
+  'text-transform': (
+    class: 'tt',
+    property: text-transform,
+    values: (
+      n: none,
+      c: capitalize,
+      u: uppercase,
+      l: lowercase
+    )
+  ),
+  'white-space': (
+    class: 'whs',
+    property: white-space,
+    values: (
+      n: normal,
+      p: pre,
+      nw: nowrap,
+      pw: pre-wrap,
+      pl: pre-line
+    )
+  )
 );
 
 :export {

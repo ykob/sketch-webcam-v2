@@ -1,21 +1,24 @@
 <template lang="pug">
 div
-  ul
-    li
-      a(
-        href = '/example/facemesh'
-        )
-        |Facemesh
-    li
-      a(
-        href = '/example/contact-lenses'
-        )
-        |Contact Lenses
-    li
-      a(
-        href = '/example/makeup'
-        )
-        |Makeup
+  .m-6
+    .fz-lg-48
+      |sketch of webcam v2
+    ul
+      li
+        a(
+          href = '/example/facemesh'
+          )
+          |Facemesh
+      li
+        a(
+          href = '/example/contact-lenses'
+          )
+          |Contact Lenses
+      li
+        a(
+          href = '/example/makeup'
+          )
+          |Makeup
 </template>
 
 <script lang="ts">

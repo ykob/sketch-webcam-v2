@@ -17,6 +17,17 @@ $spacers: ();
 @for $i from 1 through 16 {
   $spacers: map-merge($spacers, ($i: $spacer * $i))
 }
+$font-size: (
+  px: (8, 9, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56)
+);
+$font-sizes: ();
+@each $var in map-get($font-size, px) {
+  $font-sizes: map-merge($font-sizes, ($var: #{$var}px))
+}
+$font-weights: ();
+@for $i from 1 through 7 {
+  $font-weights: map-merge($font-weights, ($i: $i * 100))
+}
 
 $utilities: (
   'align-items': (
@@ -70,6 +81,16 @@ $utilities: (
       rr: row-reverse
     )
   ),
+  'font-size': (
+    class: 'fz',
+    property: font-size,
+    values: $font-sizes
+  ),
+  'font-weight': (
+    class: 'fw',
+    property: font-weight,
+    values: $font-weights
+  ),
   'justify-content': (
     class: 'fxd',
     property: justify-content,
@@ -115,6 +136,16 @@ $utilities: (
     class: 'm',
     property: margin,
     values: $spacers
+  ),
+  'text-align': (
+    class: 'ta',
+    property: text-align,
+    values: (
+      l: left,
+      c: center,
+      r: right,
+      j: justify
+    )
   ),
 );
 

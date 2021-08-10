@@ -41,6 +41,20 @@ $utilities: (
       s: stretch
     )
   ),
+  'cursor': (
+    class: 'cur',
+    property: cursor,
+    values: (
+      a: auto,
+      d: default,
+      c: crosshair,
+      ha: hand,
+      he: help,
+      m: move,
+      p: pointer,
+      t: text
+    )
+  ),
   'display': (
     class: 'd',
     property: display,
@@ -79,6 +93,15 @@ $utilities: (
       cr: column-reverse,
       r: row,
       rr: row-reverse
+    )
+  ),
+  'flex-wrap': (
+    class: 'fxw',
+    property: flex-wrap,
+    values: (
+      n: nowrap,
+      w: wrap,
+      wr: wrap-reverse
     )
   ),
   'font-size': (
@@ -145,6 +168,14 @@ $utilities: (
       h: hidden,
       s: scroll,
       a: auto
+    )
+  ),
+  'pointer-events': (
+    class: 'pe',
+    property: pointer-events,
+    values: (
+      a: auto,
+      n: none
     )
   ),
   'text-align': (

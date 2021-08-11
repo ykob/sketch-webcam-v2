@@ -1,8 +1,8 @@
 <template lang="pug">
 ButtonBase(
-  :width = 'size.width'
-  :height = 'size.width'
-  :radius = 'size.radius'
+  :width = 'size'
+  :height = 'size'
+  radius = '50%'
   role = 'white'
   tag = 'a'
   href = '/'
@@ -23,7 +23,7 @@ export default Vue.extend({
 
       return getters.breakpoint
     },
-    size(): { [key: string]: string } {
+    size(): string {
       const size = (): number => {
         switch (this.breakPoint) {
           case 'sm':
@@ -35,10 +35,7 @@ export default Vue.extend({
             return 60
         }
       }
-      return {
-        width: `${size()}px`,
-        radius: `${size() / 2}px`,
-      }
+      return `${size()}px`
     },
     iconSize(): number {
       switch (this.breakPoint) {

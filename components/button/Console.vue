@@ -27,7 +27,18 @@ export default Vue.extend({
       return getters.breakpoint
     },
     size(): string {
-      return `${48}px`
+      const size = (): number => {
+        switch (this.breakPoint) {
+          case 'sm':
+            return 32
+          case 'md':
+            return 40
+          case 'lg':
+          default:
+            return 48
+        }
+      }
+      return `${size()}px`
     },
   },
 })

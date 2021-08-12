@@ -111,11 +111,9 @@ export default Vue.extend({
       const video = this.$refs.video as HTMLVideoElement
 
       this.isLoadingCamera = true
-      await this.$video
-        .start(video)
-        .catch(() => {
-          alert('The webcam could not be enabled.')
-        })
+      await this.$video.start(video).catch(result => {
+        alert(result.message)
+      })
 
       const intervalId = setInterval(() => {
         if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {

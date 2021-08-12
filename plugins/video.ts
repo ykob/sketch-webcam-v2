@@ -8,11 +8,11 @@ class Video {
   }
 
   async start(video: HTMLVideoElement): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      let srcObject = null
-      this.elm = video
+    this.elm = video
+    let srcObject = null
 
-      await navigator.mediaDevices
+    try {
+      srcObject = await navigator.mediaDevices
         .getUserMedia({
           audio: false,
           video: {
@@ -20,19 +20,14 @@ class Video {
             facingMode: 'user'
           }
         })
-        .then(stream => {
-          srcObject = stream
-        })
-        .catch(() => {
-          reject()
-        })
+    } catch (error) {
+      throw new Error('The webcam could not be enabled.')
+    }
 
-      this.elm.srcObject = srcObject
-      this.elm.setAttribute('autoplay', 'autoplay')
-      this.elm.setAttribute('playsinline', 'playsinline')
-      this.elm.play()
-      resolve()
-    })
+    this.elm.srcObject = srcObject
+    this.elm.setAttribute('autoplay', 'autoplay')
+    this.elm.setAttribute('playsinline', 'playsinline')
+    this.elm.play()
   }
 }
 
@@ -42,7 +37,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-const video: Plugin = ({}, inject) => {
+const video: Plugin = (_, inject) => {
   inject('video', new Video())
 }
 

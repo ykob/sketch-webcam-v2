@@ -1,4 +1,4 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { GetterTree, MutationTree } from 'vuex'
 import { breakPointMd, breakPointLg } from '@/assets/css/variables.scss'
 
 export const state = () => ({

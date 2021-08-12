@@ -26,6 +26,7 @@ export default class EyeIrisPoints extends THREE.Points {
 
     super(geometry, material)
   }
+
   update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
     if (!video || !prediction) {
       this.visible = false
@@ -45,10 +46,10 @@ export default class EyeIrisPoints extends THREE.Points {
     ]
 
     uniforms.time.value += time
-    for (var i = 0, ul = positions.length; i < ul; i++) {
+    for (let i = 0, ul = positions.length; i < ul; i++) {
       let x = -positions[i][0] / video.videoWidth * resolution.x + resolution.x / 2
       let y = -positions[i][1] / video.videoHeight * resolution.y + resolution.y / 2
-      let z = positions[i][2] / video.videoWidth
+      const z = positions[i][2] / video.videoWidth
       if (screenAspect > videoAspect) {
         y = y * screenAspect / videoAspect
       } else {

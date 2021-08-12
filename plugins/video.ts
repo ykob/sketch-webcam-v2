@@ -17,8 +17,8 @@ class Video {
           audio: false,
           video: {
             width: 1920,
-            facingMode: 'user'
-          }
+            facingMode: 'user',
+          },
         })
     } catch (error) {
       throw new Error('The webcam could not be enabled.')

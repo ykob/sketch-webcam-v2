@@ -18,17 +18,17 @@ export default class EyeIris extends THREE.Points {
         THREE.UniformsLib.common,
         {
           time: {
-            value: 0
+            value: 0,
           },
           texture: {
-            value: null
-          }
+            value: null,
+          },
         },
       ]),
       vertexShader: vs,
       fragmentShader: fs,
       side: THREE.BackSide,
-      transparent: true
+      transparent: true,
     })
 
     super(geometry, material)

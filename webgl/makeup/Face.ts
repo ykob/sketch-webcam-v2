@@ -28,20 +28,20 @@ export default class Face extends THREE.Mesh {
         THREE.UniformsLib.common,
         {
           time: {
-            value: 0
+            value: 0,
           },
           texture: {
-            value: null
+            value: null,
           },
           color: {
-            value: colors[1]
+            value: colors[1],
           },
         },
       ]),
       vertexShader: vs,
       fragmentShader: fs,
       side: THREE.BackSide,
-      transparent: true
+      transparent: true,
     })
 
     super(geometry, material)

@@ -20,7 +20,7 @@ export default class FaceWireFrame extends THREE.Mesh {
         THREE.UniformsLib.common,
         {
           time: {
-            value: 0
+            value: 0,
           },
         },
       ]),

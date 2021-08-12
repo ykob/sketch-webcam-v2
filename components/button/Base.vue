@@ -63,7 +63,7 @@ export default Vue.extend({
           })
           .map(o => {
             return o[0]
-          })
+          }),
       ]
     },
   },

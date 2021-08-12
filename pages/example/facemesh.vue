@@ -51,7 +51,7 @@ export default Vue.extend({
     window.addEventListener('deviceorientation', this.resize)
 
     await this.$utils.sleep(1000)
-    await tf.setBackend('webgl');
+    await tf.setBackend('webgl')
     model = await fld.load(fld.SupportedPackages.mediapipeFacemesh)
     webgl = new WebGLContent(canvas)
     webgl.start()
@@ -66,9 +66,9 @@ export default Vue.extend({
       this.timeNow = Date.now()
       if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
         predictions = await model.estimateFaces({
-          input: this.$refs.video
+          input: this.$refs.video,
         })
-        this.timePrev = this.timeNow;
+        this.timePrev = this.timeNow
       }
       if (webgl !== null) webgl.update(video, predictions)
       requestAnimationFrame(() => {

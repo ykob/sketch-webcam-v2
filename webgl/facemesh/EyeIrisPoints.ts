@@ -16,7 +16,7 @@ export default class EyeIrisPoints extends THREE.Points {
         THREE.UniformsLib.common,
         {
           time: {
-            value: 0
+            value: 0,
           },
         },
       ]),

@@ -11,8 +11,8 @@ export default {
     host: '0.0.0.0', // defaultyarn: localhost,
     https: {
       key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
-    }
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt')),
+    },
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -22,12 +22,12 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap' },
-    ]
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -75,7 +75,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
     ['@nuxtjs/eslint-module', {
-      fix: true
+      fix: true,
     }],
     '@nuxtjs/style-resources',
   ],
@@ -89,8 +89,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

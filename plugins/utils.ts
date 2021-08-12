@@ -16,7 +16,7 @@ declare module 'vue/types/vue' {
 
 const utils: Plugin = (_, inject) => {
   inject('utils', {
-    sleep
+    sleep,
   })
 }
 

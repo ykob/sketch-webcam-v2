@@ -29,7 +29,7 @@ export default class WebGLContent {
 
   async start(faceUVCoords: number[][]): Promise<void> {
     const response = await Promise.all([
-      texLoader.loadAsync(require('@/assets/img/example/facemesh/mask.jpg'))
+      texLoader.loadAsync(require('@/assets/img/example/facemesh/mask.jpg')),
     ])
     this.face.setTexture(response[0])
     this.face.setUv(faceUVCoords)

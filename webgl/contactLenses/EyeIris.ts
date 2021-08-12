@@ -35,6 +35,7 @@ export default class EyeIris extends THREE.Points {
   }
 
   update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     if (!video || !prediction) {
       this.visible = false
       return
@@ -43,7 +44,7 @@ export default class EyeIris extends THREE.Points {
     }
 
     const { attributes } = this.geometry
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    const { uniforms } = this.material
     const { leftEyeIris, rightEyeIris } = prediction.annotations
     const screenAspect = resolution.x / resolution.y
     const videoAspect = video.videoWidth / video.videoHeight
@@ -71,7 +72,8 @@ export default class EyeIris extends THREE.Points {
   }
 
   setTexture(texture: THREE.Texture) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
     uniforms.texture.value = texture
   }
 }

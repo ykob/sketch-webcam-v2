@@ -23,16 +23,18 @@ export default class Video extends THREE.Mesh {
   }
 
   start(video: HTMLVideoElement) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
     const tVideo = new THREE.VideoTexture(video)
 
     uniforms.tVideo.value = tVideo
   }
 
   resize(width: number, height: number, video: HTMLVideoElement) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const screenAspect = width / height
     const videoAspect = video.videoWidth / video.videoHeight
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    const { uniforms } = this.material
 
     if (screenAspect > videoAspect) {
       uniforms.uvTransform.value.set(

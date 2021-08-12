@@ -49,6 +49,7 @@ export default class Face extends THREE.Mesh {
   }
 
   update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     if (!video || !prediction) {
       this.visible = false
       return
@@ -57,7 +58,7 @@ export default class Face extends THREE.Mesh {
     }
 
     const { attributes } = this.geometry
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    const { uniforms } = this.material
     const { scaledMesh } = prediction
     const screenAspect = resolution.x / resolution.y
     const videoAspect = video.videoWidth / video.videoHeight
@@ -78,7 +79,8 @@ export default class Face extends THREE.Mesh {
   }
 
   setUv(arr: number[][]) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
     const uvs: number[] = arr.reduce((pre: number[], current: number[]) => {
       pre.push(...current)
       return pre
@@ -99,7 +101,8 @@ export default class Face extends THREE.Mesh {
   }
 
   setTexture(texture: THREE.Texture) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
 
     texture.wrapS = THREE.RepeatWrapping
     texture.wrapT = THREE.RepeatWrapping
@@ -107,7 +110,8 @@ export default class Face extends THREE.Mesh {
   }
 
   changeColor(index: number) {
-    const { uniforms } = this.material as THREE.RawShaderMaterial
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
 
     uniforms.color.value.copy(this.colors[index])
   }

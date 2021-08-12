@@ -69,7 +69,7 @@ export default Vue.extend({
       this.timeNow = Date.now()
       if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
         predictions = await model.estimateFaces({
-          input: this.$refs.video,
+          input: video,
         })
         this.timePrev = this.timeNow
       }

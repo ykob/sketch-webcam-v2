@@ -70,7 +70,9 @@ export default Vue.extend({
     selectedId: 1,
   }),
   async mounted() {
-    const canvas = this.$refs.canvas as HTMLCanvasElement
+    const { canvas } = this.$refs
+
+    if (!(canvas instanceof HTMLCanvasElement)) return
 
     window.addEventListener('resize', this.resize)
     window.addEventListener('deviceorientation', this.resize)
@@ -86,12 +88,13 @@ export default Vue.extend({
   },
   methods: {
     async update() {
-      const video = this.$refs.video as HTMLVideoElement
+      const { video } = this.$refs
 
+      if (!(video instanceof HTMLVideoElement)) return
       this.timeNow = Date.now()
       if (this.timeNow - this.timePrev >= 1 / 30 * 1000 && this.isLoadedCamera === true) {
         predictions = await model.estimateFaces({
-          input: this.$refs.video,
+          input: video,
         })
         this.timePrev = this.timeNow
       }
@@ -101,15 +104,17 @@ export default Vue.extend({
       })
     },
     resize() {
+      const { video } = this.$refs
       const { state, commit } = this.$store
-      const video = this.$refs.video as HTMLVideoElement
 
+      if (!(video instanceof HTMLVideoElement)) return
       commit('resize')
       if (webgl !== null) webgl.resize(state.resolution.x, state.resolution.y, video)
     },
     async setupVideo() {
-      const video = this.$refs.video as HTMLVideoElement
+      const { video } = this.$refs
 
+      if (!(video instanceof HTMLVideoElement)) return
       this.isLoadingCamera = true
       await this.$video.start(video).catch(result => {
         alert(result.message)

@@ -31,10 +31,11 @@ import Vue from 'vue'
 import WebGLContent from '@/webgl/facemesh/'
 import * as tf from '@tensorflow/tfjs'
 import * as fld from '@tensorflow-models/face-landmarks-detection'
+import { MediaPipePrediction } from '@tensorflow-models/face-landmarks-detection/dist/types'
 
 let webgl: WebGLContent | null = null
 let model: any = null
-let predictions: any[] = []
+let predictions: MediaPipePrediction[] = []
 
 export default Vue.extend({
   data: () => ({

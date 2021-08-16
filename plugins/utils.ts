@@ -1,6 +1,6 @@
 import { Plugin } from '@nuxt/types'
 
-const sleep = (delay: number) => {
+const sleep = (delay: number): Promise<void> => {
   return new Promise((resolve) => {
     setTimeout(resolve, delay)
   })

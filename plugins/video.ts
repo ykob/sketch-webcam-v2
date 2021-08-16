@@ -2,7 +2,7 @@ import { Plugin } from '@nuxt/types'
 
 class Video {
   async start(video: HTMLVideoElement): Promise<void> {
-    let srcObject = null
+    let srcObject: MediaStream | null = null
 
     try {
       srcObject = await navigator.mediaDevices

@@ -1,14 +1,9 @@
 import { Plugin } from '@nuxt/types'
 
 class Video {
-  elm: HTMLVideoElement | null
-
-  constructor() {
-    this.elm = null
-  }
+  constructor() {}
 
   async start(video: HTMLVideoElement): Promise<void> {
-    this.elm = video
     let srcObject = null
 
     try {
@@ -24,10 +19,10 @@ class Video {
       throw new Error('The webcam could not be enabled.')
     }
 
-    this.elm.srcObject = srcObject
-    this.elm.setAttribute('autoplay', 'autoplay')
-    this.elm.setAttribute('playsinline', 'playsinline')
-    this.elm.play()
+    video.srcObject = srcObject
+    video.setAttribute('autoplay', 'autoplay')
+    video.setAttribute('playsinline', 'playsinline')
+    video.play()
   }
 }
 

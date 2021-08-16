@@ -1,8 +1,6 @@
 import { Plugin } from '@nuxt/types'
 
 class Video {
-  constructor() {}
-
   async start(video: HTMLVideoElement): Promise<void> {
     let srcObject = null
 

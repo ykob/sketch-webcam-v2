@@ -1,19 +1,10 @@
 <template lang="pug">
 div
-  Loading(
-    v-if = 'isInitialized === false'
-    )
-    |Initializing...
   Setup(
-    v-else-if = 'isLoadingCamera === false'
-    @click = 'setupVideo'
-    )
-  Loading(
-    v-else-if = 'isLoadedCamera === false'
-    )
-    |In progress to enable the webcam...
-  SetupBack(
-    v-if = 'isLoadedCamera === false'
+    :isInitialized = 'isInitialized'
+    :isLoadingCamera = 'isLoadingCamera'
+    :isLoadedCamera = 'isLoadedCamera'
+    :setupVideo = 'setupVideo'
     )
   Console(
     title = 'facemesh'

@@ -1,33 +1,45 @@
 <template lang="pug">
-.setup
-  .setup__text
-    |Let enable the webcam.
-  ButtonSetupVideo(
-    @click = '$emit("click", $event)'
+div
+  Loading(
+    v-if = 'isInitialized === false'
+    )
+    |Initializing...
+  SetupConsole(
+    v-else-if = 'isLoadingCamera === false'
+    @click = 'setupVideo'
+    )
+  Loading(
+    v-else-if = 'isLoadedCamera === false'
+    )
+    |In progress to enable the webcam...
+  SetupBack(
+    v-if = 'isLoadedCamera === false'
     )
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  props: {
+    isInitialized: {
+      type: Boolean,
+      default: false,
+    },
+    isLoadingCamera: {
+      type: Boolean,
+      default: false,
+    },
+    isLoadedCamera: {
+      type: Boolean,
+      default: false,
+    },
+    setupVideo: {
+      type: Function,
+      default: null,
+    },
+  },
+})
 </script>
 
-<style lang="scss" scoped>
-.setup {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: z(setupVideo);
-  color: #fff;
-  &__text {
-    margin-bottom: 16px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

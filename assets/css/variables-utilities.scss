@@ -1,6 +1,6 @@
 $spacer: 4px;
 $spacers: ();
-@for $i from 1 through 16 {
+@for $i from 0 through 16 {
   $spacers: map-merge($spacers, ($i: $spacer * $i))
 }
 $font-size: (
@@ -14,6 +14,7 @@ $font-weights: ();
 @for $i from 1 through 7 {
   $font-weights: map-merge($font-weights, ($i: $i * 100))
 }
+$margin-values: map-merge($spacers, (a: 'auto'));
 
 $utilities: (
   'align-items': (
@@ -81,6 +82,13 @@ $utilities: (
       rr: row-reverse
     )
   ),
+  'flex-shrink': (
+    class: 'fxsh',
+    property: flex-shrink,
+    values: (
+      0: 0,
+    )
+  ),
   'flex-wrap': (
     class: 'fxw',
     property: flex-wrap,
@@ -101,7 +109,7 @@ $utilities: (
     values: $font-weights
   ),
   'justify-content': (
-    class: 'fxd',
+    class: 'jc',
     property: justify-content,
     values: (
       c: center,
@@ -114,37 +122,37 @@ $utilities: (
   'margin-top': (
     class: 'mt',
     property: margin-top,
-    values: $spacers
+    values: $margin-values
   ),
   'margin-bottom': (
     class: 'mb',
     property: margin-bottom,
-    values: $spacers
+    values: $margin-values
   ),
   'margin-right': (
     class: 'mr',
     property: margin-right,
-    values: $spacers
+    values: $margin-values
   ),
   'margin-left': (
     class: 'ml',
     property: margin-left,
-    values: $spacers
+    values: $margin-values
   ),
   'margin-x': (
     class: 'mx',
     property: margin-right margin-left,
-    values: $spacers
+    values: $margin-values
   ),
   'margin-y': (
     class: 'my',
     property: margin-top margin-bottom,
-    values: $spacers
+    values: $margin-values
   ),
   'margin': (
     class: 'm',
     property: margin,
-    values: $spacers
+    values: $margin-values
   ),
   'overflow': (
     class: 'ov',
@@ -193,6 +201,17 @@ $utilities: (
       nw: nowrap,
       pw: pre-wrap,
       pl: pre-line
+    )
+  ),
+  'width': (
+    class: 'w',
+    property: width,
+    values: map-merge(
+      $spacers,
+      (
+        100p: '100%',
+        a: 'auto'
+      )  
     )
   )
 );

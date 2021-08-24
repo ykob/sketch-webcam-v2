@@ -28,6 +28,11 @@ $utilities: (
       s: stretch
     )
   ),
+  'color': (
+    class: 'c',
+    property: color,
+    values: $colors
+  ),
   'cursor': (
     class: 'cur',
     property: cursor,
@@ -107,6 +112,17 @@ $utilities: (
     class: 'fw',
     property: font-weight,
     values: $font-weights
+  ),
+  'height': (
+    class: 'h',
+    property: height,
+    values: map-merge(
+      $spacers,
+      (
+        100p: '100%',
+        a: 'auto'
+      )  
+    )
   ),
   'justify-content': (
     class: 'jc',

@@ -19,11 +19,7 @@ export default class Glass extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: THREE.UniformsUtils.merge([
         THREE.UniformsLib.common,
-        {
-          time: {
-            value: 0,
-          },
-        },
+        {},
       ]),
       vertexShader: vs,
       fragmentShader: fs,
@@ -42,7 +38,7 @@ export default class Glass extends THREE.Mesh {
     this.scale.set(0, 0, 0);
   }
 
-  update(time: number, resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
+  update(resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     if (!video || !prediction) {
       this.visible = false

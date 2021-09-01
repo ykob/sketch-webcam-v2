@@ -35,7 +35,7 @@ export default class Glass extends THREE.Mesh {
     this.sv = 0
     this.sa = 0
 
-    this.scale.set(0, 0, 0);
+    this.scale.set(0, 0, 0)
   }
 
   update(resolution: THREE.Vector2, video: HTMLVideoElement, prediction: any) {

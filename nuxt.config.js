@@ -21,7 +21,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Interactive demos with Mediapipe Web, three.js and Nuxt.js.' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [

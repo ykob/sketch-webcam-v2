@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Camera from './Camera'
-import FaceWireFrame from './FaceWireFrame'
+import Glass from './Glass'
 import Video from './Video'
 
 export default class WebGLContent {
@@ -12,7 +12,7 @@ export default class WebGLContent {
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
   video = new Video()
-  faceWireFrame = new FaceWireFrame()
+  glass = new Glass()
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -26,14 +26,14 @@ export default class WebGLContent {
   }
 
   start(): void {
-    this.scene.add(this.faceWireFrame)
+    this.scene.add(this.glass)
     this.clock.start()
   }
 
   update(video: HTMLVideoElement, predictions: any[]): void {
-    const time = this.clock.running === true ? this.clock.getDelta() : 0
+    // const time = this.clock.running === true ? this.clock.getDelta() : 0
 
-    this.faceWireFrame.update(time, this.resolution, video, predictions[0])
+    this.glass.update(this.resolution, video, predictions[0])
     this.renderer.render(this.scene, this.camera)
   }
 
